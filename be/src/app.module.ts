@@ -15,9 +15,6 @@ import { DataDao } from './data.dao';
     DataConnection,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    DataDao
-  ],
+  providers: [AppService, DataDao],
 })
 export class AppModule {}
