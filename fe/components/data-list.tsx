@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { DataContext } from "./data-context";
 import { Card, CardBody } from "@nextui-org/react";
 import { DataDtoWithState } from "@/types/state";
-import { IconTrash } from "@tabler/icons-react";
 import DataDelete from "./data-delete";
 import DataUpdate from "./data-edit";
 
@@ -15,6 +14,7 @@ const DataList = () => {
     case "loading":
       return <div>Loading...</div>;
     case "success":
+      if (state.data.length === 0) return <div>No data</div>;
       return (
         <ul className="flex flex-col gap-4">
           {state.data.map((item) => (

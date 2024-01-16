@@ -8,7 +8,6 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Code,
   Textarea,
 } from "@nextui-org/react";
 import { useCallback, useContext, useState } from "react";
