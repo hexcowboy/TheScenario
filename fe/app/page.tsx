@@ -1,51 +1,21 @@
-"use client";
+import { DataProvider } from "@/components/data-context";
+import DataCreate from "@/components/data-create";
+import DataList from "@/components/data-list";
 
-import { useEffect, useState } from "react"
+export const metadata = {
+  title: "Data List",
+};
 
-export default () => {
-
-  const revalidatedData = async () => {
-    const result = await fetch(`http://127.0.01:3000/data`, {
-        method: 'GET',
-        mode: 'no-cors',
-    });
-
-    console.log(result);
-
-    return result;
-  }
-  
-  const [state, setState] = useState<Response>();
-  const [loadData, setLoadData] = useState(true);
-
-  useEffect(()=>{
-
-    if (!loadData)
-      return;
-
-    setLoadData(false)
-
-    revalidatedData()
-    .then(res=>{
-      setState(res)
-    })
-  })
-
-
+export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          This is a empty shell for a Next.js app.<br />
-          Libraray's pre-installed to keep things simple: 
-        </p>
-         <ul>
-            <li>Tailwind CSS - https://tailwindcss.com/</li>
-            <li>Nextui - </li>
-            <li>Formik - </li>
-          </ul>
-          {state && <p>{JSON.stringify(state)}</p>}
-      </div>
+    <main className="flex min-h-screen flex-col p-12 sm:p-24">
+      <DataProvider>
+        <div className="flex justify-between mb-8">
+          <h1 className="text-3xl font-bold">Data List</h1>
+          <DataCreate />
+        </div>
+        <DataList />
+      </DataProvider>
     </main>
-  )
+  );
 }
